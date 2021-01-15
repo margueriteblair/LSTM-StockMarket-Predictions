@@ -6,7 +6,7 @@ import matplotlib.pyplot as plot
 import datetime as dt
 import urllib.request, json
 import tensorflow as tf
-from sklearn.preprocessing import MaxMinScaler
+from sklearn.preprocessing import MinMaxScaler
 
 #stocks come in different flavors!
 #open
@@ -39,3 +39,9 @@ if data_source == 'alphavantage':
 else:
     df = pd.read_csv(os.path.join('Stocks', 'hpq.us.txt'), delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle repository")
+
+
+df = df.sort_values('Date')
+
+
+df.head()
