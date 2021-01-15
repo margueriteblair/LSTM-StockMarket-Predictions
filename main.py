@@ -40,8 +40,13 @@ else:
     df = pd.read_csv(os.path.join('Stocks', 'hpq.us.txt'), delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle repository")
 
-
-df = df.sort_values('Date')
-
-
-df.head()
+    #we sort the dataframe by date
+    df = df.sort_values('Date')
+    #doublecheck the result
+    df.head()
+    plot.figure(figsize=(18, 9))
+    plot.plot(range(df.shape[0], 500), df['Low']+df['High'])/2.0
+    plot.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
+    plot.xlabel('Date', fontsize=18)
+    plot.ylabel('Mid Price', fontsize=18)
+    plot.show()
