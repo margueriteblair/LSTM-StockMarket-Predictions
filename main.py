@@ -17,7 +17,12 @@ from sklearn.preprocessing import MaxMinScaler
 data_source = 'kaggle'
 
 if data_source == 'alphavantage':
-    api_key="KQUV4B3CT1Z898PZ"
+    api_key = "KQUV4B3CT1Z898PZ"
     ticker = "AAL"
-    url_string="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(ticker,api_key)
-    file_to_save="stock_market_data-%s.csv"%ticker
+    url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(ticker,api_key)
+    file_to_save = "stock_market_data-%s.csv"%ticker
+    if not os.path.exists(file_to_save):
+        with urllib.request.urlopen(url_string) as url:
+            data = json.loads(url.read().decode())
+            data = data['Time Series (Daily)']
+            df = pd.DataFrame(columns=['Date', 'Low', 'High', 'Close', 'Open'])
