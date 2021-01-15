@@ -50,3 +50,10 @@ else:
     plt.xlabel('Date', fontsize=18)
     plt.ylabel('Mid Price', fontsize=18)
     plt.show()
+
+    high_prices = df.loc[:, 'High'].as_matrix()
+    low_prices = df.loc[:, 'Low'].as_matrix()
+    mid_prices = (high_prices + low_prices) / 2.0
+
+    test_data = mid_prices[11000:]
+    train_data = mid_prices[:11000]
