@@ -57,3 +57,9 @@ else:
 
     test_data = mid_prices[11000:]
     train_data = mid_prices[:11000]
+
+    #we'll be using MinMaxScaler to scale all the data to be in the region between 0 & 1
+    scaler = MinMaxScaler()
+    train_data = train_data.reshape(-1, 1)
+    test_data = test_data.reshape(-1, 1)
+    #When you scale data, you need to scale both the test data and the training data
