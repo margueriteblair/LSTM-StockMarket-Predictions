@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
-import matplotlib.pyplot as plot
+import matplotlib.pyplot as plt
 # from pandas_datareader import data
 import datetime as dt
 import urllib.request, json
@@ -44,9 +44,9 @@ else:
     df = df.sort_values('Date')
     #doublecheck the result
     df.head()
-    plot.figure(figsize=(18, 9))
-    plot.plot(range(df.shape[0], 500), df['Low']+df['High'])/2.0
-    plot.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
-    plot.xlabel('Date', fontsize=18)
-    plot.ylabel('Mid Price', fontsize=18)
-    plot.show()
+    plt.figure(figsize=(18, 9))
+    plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
+    plt.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
+    plt.xlabel('Date', fontsize=18)
+    plt.ylabel('Mid Price', fontsize=18)
+    plt.show()
