@@ -117,3 +117,25 @@ else:
     plt.ylabel('Mid Price')
     plt.legend(fontsize=18)
     plt.show()
+
+    window_size = 100
+    N = train_data.size
+
+    run_avg_predictions = []
+    run_avg_x = []
+
+    mse_errors = []
+
+    running_mean = 0.0
+    run_avg_predictions.append(running_mean)
+
+    decay = 0.5
+
+    for pred_idx in range(1, N):
+        running_mean = running_mean * decay + (1.0 - decay) * train_data[pred_idx - 1]
+        run_avg_predictions.append(running_mean)
+        mse_errors.append((run_avg_predictions[-1] - train_data[pred_idx]) ** 2)
+        run_avg_x.append(date)
+
+    print('MSE error for EMA averaging: %.5f' % (0.5 * np.mean(mse_errors)))
+
