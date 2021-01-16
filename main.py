@@ -139,3 +139,11 @@ else:
 
     print('MSE error for EMA averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 
+    plt.figure(figsize=(18, 9))
+    plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
+    plt.plot(range(0, N), run_avg_predictions, color='orange', label='Prediction')
+    # plt.xticks(range(0,df.shape[0],50),df['Date'].loc[::50],rotation=45)
+    plt.xlabel('Date')
+    plt.ylabel('Mid Price')
+    plt.legend(fontsize=18)
+    plt.show()
