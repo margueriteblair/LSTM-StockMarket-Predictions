@@ -76,3 +76,14 @@ else:
     train_data = train_data.reshape(-1)
     #normalize the test data
     test_data = scaler.transform(test_data).reshape(-1)
+
+    #now perform the exponential moving average soothing
+    #so the data will have a smoother curve than the original ragged data!
+    EMA = 0.0
+    gamma = 0.1
+    for ti in range(11000):
+        EMA = gamma*train_data[ti] + (1-gamma)*EMA
+        train_data[ti] = EMA
+
+    #the below is used for vizualization
+    all_mid_data = np.concatenate([train_data, test_data], axis=0)
