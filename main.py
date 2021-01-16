@@ -71,3 +71,8 @@ else:
 
     scaler.fit(train_data[di+smoothing_window_size:,:])
     train_data[di+smoothing_window_size:,:] = scaler.transform(train_data[di+smoothing_window_size:,:])
+
+    #now we rehshape the train and test data back to the shape of [data_size]
+    train_data = train_data.reshape(-1)
+    #normalize the test data
+    test_data = scaler.transform(test_data).reshape(-1)
