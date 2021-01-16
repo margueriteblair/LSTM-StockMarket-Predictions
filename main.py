@@ -116,7 +116,7 @@ else:
     plt.xlabel('Date')
     plt.ylabel('Mid Price')
     plt.legend(fontsize=18)
-    plt.show()
+    # plt.show()
 
     window_size = 100
     N = train_data.size
@@ -147,3 +147,10 @@ else:
     plt.ylabel('Mid Price')
     plt.legend(fontsize=18)
     plt.show()
+
+    #all of the above is before we incorporate LST modeling
+    #Long Short-Term Memory (LSTM) models are extremely powerful time-series models.
+    # A LSTM can predict an arbitrary number of steps into the future.
+    # A LSTM module (or a cell) has 5 essential components which allows them to model both long-term and short-term data.
+    #The above code only expects one step into the future, but with LSTM we can predict multiple steps into the future
+
