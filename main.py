@@ -87,3 +87,22 @@ else:
 
     #the below is used for vizualization
     all_mid_data = np.concatenate([train_data, test_data], axis=0)
+
+    window_size = 100
+    N = train_data.size
+    std_avg_predictions = []
+    std_avg_x = []
+    mse_errors = []
+
+    for pred_idx in range(window_size, N):
+
+        if pred_idx >= N:
+            date = dt.datetime.strptime(k, '%Y-%m-%d').date() + dt.timedelta(days=1)
+        else:
+            date = df.loc[pred_idx, 'Date']
+
+        std_avg_predictions.append(np.mean(train_data[pred_idx - window_size:pred_idx]))
+        mse_errors.append((std_avg_predictions[-1] - train_data[pred_idx]) ** 2)
+        std_avg_x.append(date)
+
+    print('MSE error for standard averaging: %.5f' % (0.5 * np.mean(mse_errors)))
