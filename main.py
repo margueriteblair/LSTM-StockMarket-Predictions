@@ -52,8 +52,8 @@ else:
     # plt.show()
     #commented out the above to seee other mathplotlib
 
-    high_prices = df.loc[:, 'High'].as_matrix()
-    low_prices = df.loc[:, 'Low'].as_matrix()
+    high_prices = df.loc[:, 'High'].to_numpy()
+    low_prices = df.loc[:, 'Low'].to_numpy()
     mid_prices = (high_prices + low_prices) / 2.0
 
     test_data = mid_prices[11000:]
@@ -66,12 +66,13 @@ else:
     #When you scale data, you need to scale both the test data and the training data
     #We're going to normalize data by breaking the full series of data into windows
     smoothing_window_size = 2500
-    for di in range(0, 1000, smoothing_window_size):
-        scaler.fit(train_data[di: di+smoothing_window_size,:])
-        train_data[di:di+smoothing_window_size,:] = scaler.transform(train_data[train_data[di:di+smoothing_window_size:,:]])
+    for di in range(0, 10000, smoothing_window_size):
+        scaler.fit(train_data[di:di + smoothing_window_size, :])
+        train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
 
-    scaler.fit(train_data[di+smoothing_window_size:,:])
-    train_data[di+smoothing_window_size:,:] = scaler.transform(train_data[di+smoothing_window_size:,:])
+    # You normalize the last bit of remaining data
+    scaler.fit(train_data[di + smoothing_window_size:, :])
+    train_data[di + smoothing_window_size:, :] = scaler.transform(train_data[di + smoothing_window_size:, :])
 
     #now we rehshape the train and test data back to the shape of [data_size]
     train_data = train_data.reshape(-1)
