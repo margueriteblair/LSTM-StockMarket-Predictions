@@ -4,6 +4,7 @@ import os
 #os is a standard import in python that provides us with functions for interacting with the operating system
 #for instance, os.name will return the name of the os that one is using
 import matplotlib.pyplot as plt
+#mathplotlib is a comprehensive library used for making data vizualizations in python
 # from pandas_datareader import data
 import datetime as dt
 import urllib.request, json
@@ -52,10 +53,13 @@ else:
     df = pd.read_csv(os.path.join('Stocks', 'hpq.us.txt'), delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle repository")
 
-    #we sort the dataframe by date
+    #pandas.DataFrame.sort_values() accepts a string, which is a name or list of names to sort by
+    #we want to sort the dataframe by date
     df = df.sort_values('Date')
-    #doublecheck the result
-    df.head()
+    #double check the result
+    # df.head()
+    #pandas.dataFrame.head() returns the first n rows of a dataframe
+    #the default is 5 when left blank
     plt.figure(figsize=(18, 9))
     plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
     plt.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
