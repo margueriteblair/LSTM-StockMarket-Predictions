@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import os
+#os is a standard import in python that provides us with functions for interacting with the operating system
+#for instance, os.name will return the name of the os that one is using
 import matplotlib.pyplot as plt
 # from pandas_datareader import data
 import datetime as dt
@@ -41,6 +43,12 @@ if data_source == 'alphavantage':
         print("File already exists. Leading data from CSV.")
         df = pd.read_csv(file_to_save)
 else:
+    #i'm going to break it down into the nitty gritty
+    #we're saying that our dataframe is equal to the pandas method read_csv
+    #within read_csv() we're passing a filepath using 'os' module
+    #although the delimiter by default is ',' we'll explicitly declare our delimiter
+    #we'll also pass in a parameter for usecols, which accepts a list-like arg
+    #use cols can either be integer based or column names
     df = pd.read_csv(os.path.join('Stocks', 'hpq.us.txt'), delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle repository")
 
