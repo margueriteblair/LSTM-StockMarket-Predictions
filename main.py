@@ -64,6 +64,9 @@ else:
     #figsize is the width and height in inches
     plt.figure(figsize=(18, 9))
     #pyplot.plot() plots y vs x as either lines or markers
+    #we're saying we want to plot as many x values are there are rows in the first column
+    #and for the y values, we're plotting the mid price for all entries
+    #that's why we're diving the high + low / 2
     plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
     plt.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
     plt.xlabel('Date', fontsize=18)
