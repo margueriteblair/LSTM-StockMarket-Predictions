@@ -85,8 +85,8 @@ else:
 
     #we're splitting the data directly in half to create a training and a test set
     #although the standard is more typically 80:20
-    train_data = mid_prices[11000:]
-    test_data = mid_prices[:11000]
+    test_data = mid_prices[11000:]
+    train_data = mid_prices[:11000]
 
     #we'll be using MinMaxScaler to scale all the data to be in the region between 0 & 1
     #we also reshape the test and train data to be in the shape
