@@ -180,6 +180,7 @@ else:
     # plt.xticks(range(0,df.shape[0],50),df['Date'].loc[::50],rotation=45)
     plt.xlabel('Date', fontsize=18)
     plt.ylabel('Mid Price', fontsize=18)
+    # plt.legend(fontsize=18)
     plt.show()
 
     #all of the above is before we incorporate LST modeling
