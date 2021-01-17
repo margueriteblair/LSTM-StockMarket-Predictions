@@ -14,9 +14,13 @@ from sklearn.preprocessing import MinMaxScaler
 #high
 #low
 
+#because our application runs on launch, we'll just toggle the datasource
+#by literally editing it below
 data_source = 'kaggle'
 
 if data_source == 'alphavantage':
+    #nb: alphasource isn't fleshed out yet!
+    #working on the kaggle dataset first
     api_key = "KQUV4B3CT1Z898PZ"
     ticker = "AAL"
     url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(ticker,api_key)
