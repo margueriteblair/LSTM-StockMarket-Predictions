@@ -96,6 +96,8 @@ else:
     #When you scale data, you need to scale both the test data and the training data
     #We're going to normalize data by breaking the full series of data into windows
     smoothing_window_size = 2500
+    #we're saying for di in range 0-10000 and we're incrementing by 2500 upwards
+    #it then reformats each increments of that data
     for di in range(0, 10000, smoothing_window_size):
         scaler.fit(train_data[di:di + smoothing_window_size, :])
         train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
