@@ -129,6 +129,7 @@ else:
     std_avg_x = []
     #mse stands for mean squared errors
     mse_errors = []
+    #wedo this before moving on to long short term mem models
 
     for pred_idx in range(window_size, N):
 
@@ -177,9 +178,8 @@ else:
     plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
     plt.plot(range(0, N), run_avg_predictions, color='orange', label='Prediction')
     # plt.xticks(range(0,df.shape[0],50),df['Date'].loc[::50],rotation=45)
-    plt.xlabel('Date')
-    plt.ylabel('Mid Price')
-    plt.legend(fontsize=18)
+    plt.xlabel('Date', fontsize=18)
+    plt.ylabel('Mid Price', fontsize=18)
     plt.show()
 
     #all of the above is before we incorporate LST modeling
