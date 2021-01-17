@@ -106,7 +106,7 @@ else:
     scaler.fit(train_data[di + smoothing_window_size:, :])
     train_data[di + smoothing_window_size:, :] = scaler.transform(train_data[di + smoothing_window_size:, :])
 
-    #now we rehshape the train and test data back to the shape of [data_size]
+    #now we reshape the train and test data back to the shape of [data_size]
     train_data = train_data.reshape(-1)
     #normalize the test data
     test_data = scaler.transform(test_data).reshape(-1)
@@ -122,10 +122,12 @@ else:
     #the below is used for vizualization
     all_mid_data = np.concatenate([train_data, test_data], axis=0)
 
+    #one step ahead prediction via averaging:
     window_size = 100
     N = train_data.size
     std_avg_predictions = []
     std_avg_x = []
+    #mse stands for mean squared errors
     mse_errors = []
 
     for pred_idx in range(window_size, N):
