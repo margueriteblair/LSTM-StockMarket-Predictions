@@ -69,11 +69,16 @@ else:
     #that's why we're diving the high + low / 2
     plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
     plt.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
+    #the two following lines allow us to label the x and y axis and provide a font size
     plt.xlabel('Date', fontsize=18)
     plt.ylabel('Mid Price', fontsize=18)
     # plt.show()
-    #commented out the above to seee other mathplotlib
-
+    #commented out the above to see other mathplotlib
+    #pandas.dataFrame.to_numpy() will convert a dataframe to a numpy array
+    #we want to do this for both the high and the low prices so that we're effectively able to get a mid price
+    #pandas.dataFrame.loc() is used to access a group of rows or columns by labels or boolean array
+    #pandas.dataFrame.iloc() does a similar function but instead with integer values
+    #I can't quite figure out why, but I need that colon separating the high and low
     high_prices = df.loc[:, 'High'].to_numpy()
     low_prices = df.loc[:, 'Low'].to_numpy()
     mid_prices = (high_prices + low_prices) / 2.0
