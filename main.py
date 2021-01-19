@@ -180,14 +180,12 @@ else:
         run_avg_x.append(date)
 
     print('MSE error for EMA averaging: %.5f' % (0.5 * np.mean(mse_errors)))
-
+    #from the two calculated MSE's we can see that the EMA method of calculating stock prices has a higher precision
     plt.figure(figsize=(18, 9))
     plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
     plt.plot(range(0, N), run_avg_predictions, color='orange', label='Prediction')
-    # plt.xticks(range(0,df.shape[0],50),df['Date'].loc[::50],rotation=45)
     plt.xlabel('Date', fontsize=18)
     plt.ylabel('Mid Price', fontsize=18)
-    # plt.legend(fontsize=18)
     plt.show()
 
     #all of the above is before we incorporate LST modeling
