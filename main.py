@@ -117,13 +117,16 @@ else:
     #smoothing the data heps us to get rid of the raggedness of the data in stock prices --> result: smoother curve
     #we ONLY smooth the training data!
     #EMA = Exponential Moving Average is a type of moving average that places a greater weight and significance on the most recent data points
+    #This is opposite of SMA (Simple Moving Average) which applies the same weight across all data points
     EMA = 0.0
+    #todo: explain gamma constant here
     gamma = 0.1
     for ti in range(11000):
         EMA = gamma*train_data[ti] + (1-gamma)*EMA
         train_data[ti] = EMA
 
     #the below is used for vizualization
+    #we've already got out train_data aligned on the graph, & we concatenate test data too
     all_mid_data = np.concatenate([train_data, test_data], axis=0)
 
     #one step ahead prediction via averaging:
@@ -135,8 +138,9 @@ else:
     mse_errors = []
     #wedo this before moving on to long short term mem models
 
+    #below we'll be running to tests to compare EMA vs SMA
+    #we'll return the Mean Squared Average (MSE) for both of these, to see which method is more efficient
     for pred_idx in range(window_size, N):
-
         if pred_idx >= N:
             date = dt.datetime.strptime(k, '%Y-%m-%d').date() + dt.timedelta(days=1)
         else:
