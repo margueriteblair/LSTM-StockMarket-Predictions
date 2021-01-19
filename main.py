@@ -129,7 +129,7 @@ else:
     #we've already got out train_data aligned on the graph, & we concatenate test data too
     all_mid_data = np.concatenate([train_data, test_data], axis=0)
 
-    #one step ahead prediction via averaging:
+    #one step ahead prediction via SMA:
     window_size = 100
     N = train_data.size
     std_avg_predictions = []
@@ -137,7 +137,6 @@ else:
     #mse stands for mean squared errors
     mse_errors = []
     #wedo this before moving on to long short term mem models
-
     #below we'll be running to tests to compare EMA vs SMA
     #we'll return the Mean Squared Average (MSE) for both of these, to see which method is more efficient
     for pred_idx in range(window_size, N):
@@ -160,14 +159,13 @@ else:
     plt.legend(fontsize=18)
     # plt.show()
 
+
+    #now we repeat the process for EMA:
     window_size = 100
     N = train_data.size
-
     run_avg_predictions = []
     run_avg_x = []
-
     mse_errors = []
-
     running_mean = 0.0
     run_avg_predictions.append(running_mean)
 
