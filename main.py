@@ -113,6 +113,10 @@ else:
 
     #now perform the exponential moving average soothing
     #so the data will have a smoother curve than the original ragged data!
+    #we're going to need to smooth the data using an exponential moving average
+    #smoothing the data heps us to get rid of the raggedness of the data in stock prices --> result: smoother curve
+    #we ONLY smooth the training data!
+    #EMA = Exponential Moving Average is a type of moving average that places a greater weight and significance on the most recent data points
     EMA = 0.0
     gamma = 0.1
     for ti in range(11000):
