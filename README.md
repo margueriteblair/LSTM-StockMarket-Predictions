@@ -1,7 +1,7 @@
 # StockMarket-Predictions
 
 A machine learning model that makes use of Exponential Moving Averages (EMA's) to predict a future price of a stock.
-However, this model can and will be improved upon in the future as it will be converted to a Long Short Term Model (LSTM) time series to maintain accuracy as the model predicts a greater number of steps into the future.
+However, this model can and <strong>will</strong> be improved upon in the future as it will be converted to a Long Short Term Model (LSTM, a typeof neural network) time series to maintain accuracy as the model predicts a greater number of steps into the future.
 
 
 <h4>Technologies Used:</h4>
