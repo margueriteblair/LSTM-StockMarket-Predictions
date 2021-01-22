@@ -34,7 +34,7 @@ if data_source == 'alphavantage':
         print("File already exists. Leading data from CSV.")
         df = pd.read_csv(file_to_save)
 else:
-    df = pd.read_csv("Stocks/aal.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+    df = pd.read_csv("Stocks/hewl.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle dataset")
     rows, columns = df.shape
     print(rows)
