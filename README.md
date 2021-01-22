@@ -3,7 +3,7 @@
 A machine learning model that makes use of Exponential Moving Averages (EMA's) to predict a future price of a stock.
 However, this model can and <strong>will</strong> be improved upon in the future as it will be converted to a Long Short Term Model (LSTM, a type of neural network) time series to maintain accuracy as the model predicts a greater number of steps into the future.
 
-This project:
+<h4>This project:</h4>
 <li>Uses a Kaggle dataset to analyze the data for thousands of different stock options</li>
 <li>Makes use of MatPlotLib for data vizualizations</li>
 <li>Implements both Exponential Moving Averages & Simple Moving Averages to predict a future stock price</li>
