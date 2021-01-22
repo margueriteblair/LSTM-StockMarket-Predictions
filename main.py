@@ -34,7 +34,7 @@ if data_source == 'alphavantage':
         print("File already exists. Leading data from CSV.")
         df = pd.read_csv(file_to_save)
 else:
-    df = pd.read_csv("Stocks/hpq.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+    df = pd.read_csv("Stocks/aal.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle dataset")
     rows, columns = df.shape
     print(rows)
@@ -58,7 +58,7 @@ else:
     scaler = MinMaxScaler()
     train_data = train_data.reshape(-1, 1)
     test_data = test_data.reshape(-1, 1)
-    smoothing_window_size = int(round((split-100)/4))
+    smoothing_window_size = int(split-100/4)
     for di in range(0, split-100, smoothing_window_size):
         scaler.fit(train_data[di:di + smoothing_window_size, :])
         train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
