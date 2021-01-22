@@ -1,5 +1,15 @@
 # StockMarket-Predictions
 
-AI modelling using Exponential Moving Averages (EMA's) to predict once time step into the future on a stock's price.
+A machine learning model that makes use of Exponential Moving Averages (EMA's) to predict a future price of a stock.
+However, this model can and will be improved upon in the future as it will be converted to a Long Short Term Model (LSTM) time series to maintain accuracy as the model predicts a greater number of steps into the future.
 
-While EMA is a decent prediction tactic for one step into the future,this project will change to the Long Short Term Model (LSTM) for predictions, which can predict an arbitrary number of steps into the future.
+
+<h4>Technologies Used:</h4>
+<li>Python</li>
+<li>Pandas</li>
+<li>Numpy</li>
+<li>Kaggle Stock Data API</li>
+<li>Sklearn</li>
+<li>Exponential Moving Averages</li>
+
+Kaggle data used for this project: https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs
