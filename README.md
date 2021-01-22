@@ -10,6 +10,6 @@ However, this model can and will be improved upon in the future as it will be co
 <li>Numpy</li>
 <li>Kaggle Stock Data API</li>
 <li>Sklearn</li>
-<li>Exponential Moving Averages</li>
+<li>Exponential Moving Averages</li><br>
 
 Kaggle data used for this project: https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs
