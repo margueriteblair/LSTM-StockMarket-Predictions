@@ -9,7 +9,6 @@ import datetime as dt
 import urllib.request, json
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
 
 data_source = 'kaggle'
 
@@ -37,7 +36,8 @@ if data_source == 'alphavantage':
 else:
     df = pd.read_csv("Stocks/hpq.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
     print("Loaded data from the Kaggle dataset")
-
+    rows, columns = df.shape
+    print(rows)
     df = df.sort_values('Date')
     # print(df.head())
 
@@ -51,14 +51,15 @@ else:
     low_prices = df.loc[:, 'Low'].to_numpy()
     mid_prices = (high_prices + low_prices) / 2.0
 
-    train_data = mid_prices[:11000]
-    test_data = mid_prices[11000:]
+    split = int(round(0.85*rows))
+    train_data = mid_prices[:split]
+    test_data = mid_prices[split:]
 
     scaler = MinMaxScaler()
     train_data = train_data.reshape(-1, 1)
     test_data = test_data.reshape(-1, 1)
-    smoothing_window_size = 2500
-    for di in range(0, 10000, smoothing_window_size):
+    smoothing_window_size = int(round((split-100)/4))
+    for di in range(0, split-100, smoothing_window_size):
         scaler.fit(train_data[di:di + smoothing_window_size, :])
         train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
 
@@ -70,7 +71,7 @@ else:
 
     EMA = 0.0
     gamma = 0.1
-    for ti in range(11000):
+    for ti in range(split):
         EMA = gamma*train_data[ti] + (1-gamma)*EMA
         train_data[ti] = EMA
 
