@@ -4,12 +4,12 @@ import os
 #os is a standard import in python that provides us with functions for interacting with the operating system
 #for instance, os.name will return the name of the os that one is using
 import matplotlib.pyplot as plt
-#matplotlib is a comprehensive library used for making data vizualizations in python
 # from pandas_datareader import data
 import datetime as dt
 import urllib.request, json
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
 
 data_source = 'kaggle'
 
@@ -35,8 +35,8 @@ if data_source == 'alphavantage':
         print("File already exists. Leading data from CSV.")
         df = pd.read_csv(file_to_save)
 else:
-    df = pd.read_csv(os.path.join('Stocks', 'hpq.us.txt'), delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
-    print("Loaded data from the Kaggle repository")
+    df = pd.read_csv("Stocks/hpq.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+    print("Loaded data from the Kaggle dataset")
 
     df = df.sort_values('Date')
     # print(df.head())
@@ -51,8 +51,8 @@ else:
     low_prices = df.loc[:, 'Low'].to_numpy()
     mid_prices = (high_prices + low_prices) / 2.0
 
-    test_data = mid_prices[11000:]
     train_data = mid_prices[:11000]
+    test_data = mid_prices[11000:]
 
     scaler = MinMaxScaler()
     train_data = train_data.reshape(-1, 1)
