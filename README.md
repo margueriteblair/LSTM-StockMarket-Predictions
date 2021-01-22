@@ -7,6 +7,8 @@ However, this model can and <strong>will</strong> be improved upon in the future
 <li>Uses a Kaggle dataset to analyze the data for thousands of different stock options</li>
 <li>Makes use of MatPlotLib for data vizualizations</li>
 <li>Implements both Exponential Moving Averages & Simple Moving Averages to predict a future stock price</li>
+<li>Uses a test-train-split to train the first half of the data against the model, and then the other half to test it.</li>
+<li>Returns a prediction for a future stock price.</li>
 <li>Compares the accuracy of both the EMA & SMA through finding the Mean Square Error (MSE)</li><br>
 
 
