@@ -12,7 +12,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 data_source = 'kaggle'
 
-df = pd.read_csv("Stocks/hpq.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+df = pd.read_csv("Stocks/aal.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
 print("Loaded data from the Kaggle dataset")
 rows, columns = df.shape
 print(rows)
@@ -33,19 +33,19 @@ split = int(round(0.85*rows))
 train_data = mid_prices[:split]
 test_data = mid_prices[split:]
 
-scaler = MinMaxScaler()
-train_data = train_data.reshape(-1, 1)
-test_data = test_data.reshape(-1, 1)
-smoothing_window_size = int(split-100/4)
-for di in range(0, split-100, smoothing_window_size):
-    scaler.fit(train_data[di:di + smoothing_window_size, :])
-    train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
+# scaler = MinMaxScaler()
+# train_data = train_data.reshape(-1, 1)
+# test_data = test_data.reshape(-1, 1)
+# smoothing_window_size = int(split-100/4)
+# for di in range(0, split-100, smoothing_window_size):
+    # scaler.fit(train_data[di:di + smoothing_window_size, :])
+    # train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
 
-scaler.fit(train_data[di + smoothing_window_size:, :])
-train_data[di + smoothing_window_size:, :] = scaler.transform(train_data[di + smoothing_window_size:, :])
-
-train_data = train_data.reshape(-1)
-test_data = scaler.transform(test_data).reshape(-1)
+# scaler.fit(train_data[di + smoothing_window_size:, :])
+# train_data[di + smoothing_window_size:, :] = scaler.transform(train_data[di + smoothing_window_size:, :])
+#
+# train_data = train_data.reshape(-1)
+# test_data = scaler.transform(test_data).reshape(-1)
 
 EMA = 0.0
 gamma = 0.1
@@ -75,6 +75,7 @@ print('MSE error for standard averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 plt.figure(figsize=(18, 9))
 plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
 plt.plot(range(window_size, N), std_avg_predictions, color='orange', label='Prediction')
+plt.title('SMA Prediction vs Actual')
 plt.xlabel('Date')
 plt.ylabel('Mid Price')
 plt.legend(fontsize=18)
@@ -101,6 +102,7 @@ print('MSE error for EMA averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 plt.figure(figsize=(18, 9))
 plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
 plt.plot(range(0, N), run_avg_predictions, color='orange', label='Prediction')
+plt.title('SMA Prediction vs Actual')
 plt.xlabel('Date', fontsize=18)
 plt.ylabel('Mid Price', fontsize=18)
 plt.show()
