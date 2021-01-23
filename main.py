@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 import os
-#os is a standard import in python that provides us with functions for interacting with the operating system
-#for instance, os.name will return the name of the os that one is using
 import matplotlib.pyplot as plt
 # from pandas_datareader import data
 import datetime as dt
@@ -12,10 +10,9 @@ from sklearn.preprocessing import MinMaxScaler
 
 data_source = 'kaggle'
 
-df = pd.read_csv("Stocks/aal.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+df = pd.read_csv("Stocks/hpq.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
 print("Loaded data from the Kaggle dataset")
 rows, columns = df.shape
-print(rows)
 df = df.sort_values('Date')
 # print(df.head())
 
@@ -62,10 +59,7 @@ std_avg_x = []
 mse_errors = []
 
 for pred_idx in range(window_size, N):
-    if pred_idx >= N:
-        date = dt.datetime.strptime(k, '%Y-%m-%d').date() + dt.timedelta(days=1)
-    else:
-        date = df.loc[pred_idx, 'Date']
+    date = df.loc[pred_idx, 'Date']
 
     std_avg_predictions.append(np.mean(train_data[pred_idx - window_size:pred_idx]))
     mse_errors.append((std_avg_predictions[-1] - train_data[pred_idx]) ** 2)
@@ -105,6 +99,7 @@ plt.plot(range(0, N), run_avg_predictions, color='orange', label='Prediction')
 plt.title('EMA Prediction vs Actual')
 plt.xlabel('Date', fontsize=18)
 plt.ylabel('Mid Price', fontsize=18)
+plt.legend(fontsize=18)
 plt.show()
 
 
