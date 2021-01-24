@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 data_source = 'kaggle'
 
-df = pd.read_csv("Stocks/hpq.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+df = pd.read_csv("Stocks/aapl.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
 print("Loaded data from the Kaggle dataset")
 rows, columns = df.shape
 df = df.sort_values('Date')
@@ -53,17 +53,15 @@ for ti in range(split):
 all_mid_data = np.concatenate([train_data, test_data], axis=0)
 
 window_size = 100
-N = train_data.size
+N = all_mid_data.size+200
 std_avg_predictions = []
 std_avg_x = []
 mse_errors = []
 
 for pred_idx in range(window_size, N):
-    # date = df.loc[pred_idx, 'Date']
 
     std_avg_predictions.append(np.mean(train_data[pred_idx - window_size:pred_idx]))
     mse_errors.append((std_avg_predictions[-1] - train_data[pred_idx]) ** 2)
-    # std_avg_x.append(date)
 
 print('MSE error for standard averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 plt.figure(figsize=(18, 9))
@@ -91,7 +89,6 @@ for pred_idx in range(1, N):
     running_mean = running_mean * decay + (1.0 - decay) * train_data[pred_idx - 1]
     run_avg_predictions.append(running_mean)
     mse_errors.append((run_avg_predictions[-1] - train_data[pred_idx]) ** 2)
-    # run_avg_x.append(date)
 
 print('MSE error for EMA averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 plt.figure(figsize=(18, 9))
