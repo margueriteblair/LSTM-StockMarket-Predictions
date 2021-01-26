@@ -153,6 +153,10 @@ regressor.compile(optimizer='adam', loss='mean_squared_error')
 regressor.fit(X_train, y_train, epochs=100, batch_size=32)
 #an epoch in machine learning is a passage of time, when we see all the epochs print out
 #it's simply a reflection of all the passes of the algorithm
+#now we make predctions and visualize results
+dataset_test = pd.read_csv("Stocks/aapl.us.txt", index_col="Date", parse_dates=True)
+real_stock_price = dataset_test.iloc[:, 1:2].values
+
 
 
 
