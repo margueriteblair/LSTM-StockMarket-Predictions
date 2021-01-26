@@ -144,6 +144,15 @@ regressor.add(Dropout(0.2))
 #we only want/need one output so we set the output layer last and have units set to one
 regressor.add(Dense(units=1))
 
+regressor.compile(optimizer='adam', loss='mean_squared_error')
+#the optimizer is one of the required values here for the compiler
+#we have to make sure that the weights dont get too large
+#we have to regularize the data
+#if the data becomes to large, it's then overfit for the model
+#dropouts are used in making the neurons morerobust and allowingthem to predict the trends without focusing on any one neuron
+regressor.fit(X_train, y_train, epochs=100, batch_size=32)
+#an epoch in machine learning is a passage of time, when we see all the epochs print out
+#it's simply a reflection of all the passes of the algorithm
 
 
 
