@@ -156,8 +156,14 @@ regressor.fit(X_train, y_train, epochs=100, batch_size=32)
 #now we make predctions and visualize results
 dataset_test = pd.read_csv("Stocks/aapl.us.txt", index_col="Date", parse_dates=True)
 real_stock_price = dataset_test.iloc[:, 1:2].values
+dataset_test["Volume"] = dataset_test["Volume"].str.repace(',', '').astype(float)
 
+test_set = dataset_test["Open"]
+test_set = pd.DataFrame(test_set)
 
+test_set.info()
+
+#now we're going to get the total predicted stock price of 2017
 
 
 
