@@ -99,8 +99,11 @@ plt.show()
 #we need to scale down numbers because the distance calculation that happens
 #in the training phase needs to be mitigated to create more accurate results
 
+training_set = df['Open']
+training_set = pd.DataFrame(training_set)
+
 sc = MinMaxScaler(feature_range=(0, 1))
-train_data_scaled = sc.fit(mid_prices)
+train_data_scaled = sc.fit(training_set)
 
 #below, we're going to create a data structure w 60 timestamps
 #and 1 output
@@ -111,6 +114,17 @@ for i in range(60, mid_prices.size):
     y_train.append(train_data_scaled[i, 0])
 X_train, y_train = np.array(X_train), np.array(y_train)
 X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+
+from keras.models import Sequential #We can create a sequential model by passing a list through it
+from keras.layers import Dense #Regularly connected NN layer, reps a matrix vector
+from keras.layers import LSTM
+from keras.layers import Dropout
+
+regressor = Sequential()
+#the above initializes the neural network
+
+#now we train the neural network for prediction
+
 
 
 
