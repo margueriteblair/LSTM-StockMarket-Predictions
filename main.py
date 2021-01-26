@@ -30,20 +30,6 @@ split = int(round(0.85*rows))
 train_data = mid_prices[:split]
 test_data = mid_prices[split:]
 
-# scaler = MinMaxScaler()
-# train_data = train_data.reshape(-1, 1)
-# test_data = test_data.reshape(-1, 1)
-# smoothing_window_size = int(split-100/4)
-# for di in range(0, split-100, smoothing_window_size):
-    # scaler.fit(train_data[di:di + smoothing_window_size, :])
-    # train_data[di:di + smoothing_window_size, :] = scaler.transform(train_data[di:di + smoothing_window_size, :])
-
-# scaler.fit(train_data[di + smoothing_window_size:, :])
-# train_data[di + smoothing_window_size:, :] = scaler.transform(train_data[di + smoothing_window_size:, :])
-#
-# train_data = train_data.reshape(-1)
-# test_data = scaler.transform(test_data).reshape(-1)
-
 EMA = 0.0
 gamma = 0.1
 for ti in range(split):
