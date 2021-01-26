@@ -124,6 +124,26 @@ regressor = Sequential()
 #the above initializes the neural network
 
 #now we train the neural network for prediction
+#this step is the most important
+#data is fed to the RNN and is trained for prediction assigning random biases and weights
+
+regressor.add(LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], 1)))
+regressor.add(Dropout(0.2)) #regularization technique
+
+#now we are adding a second LSTM layer and some dropout regularization
+regressor.add(LSTM(units=50, return_sequences=True))
+regressor.add(Dropout(0.2))
+
+#adding a third layer and some dropout regularization
+regressor.add(LSTM(units=50, return_sequences=True))
+regressor.add(Dropout(0.2))
+
+#adding a fourth LSTM layer and once again, some droout regularization
+regressor.add(LSTM(units=50))
+regressor.add(Dropout(0.2))
+#we only want/need one output so we set the output layer last and have units set to one
+regressor.add(Dense(units=1))
+
 
 
 
