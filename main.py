@@ -1,19 +1,18 @@
 import pandas as pd
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 # from pandas_datareader import data
 import datetime as dt
 import urllib.request, json
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
-
-data_source = 'kaggle'
+0
 
 df = pd.read_csv("Stocks/aapl.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
 print("Loaded data from the Kaggle dataset")
 rows, columns = df.shape
 df = df.sort_values('Date')
+df.isna().any()
 # print(df.head())
 
 plt.figure(figsize=(18, 9))
