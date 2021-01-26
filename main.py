@@ -173,8 +173,15 @@ X_test = np.array(X_test)
 X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+predicted_stock_price = pd.DataFrame(predicted_stock_price)
 
-#now we're going to get the total predicted stock price of 2017
+plt.plot(real_stock_price, color="red", label="Actual")
+plt.plot(predicted_stock_price, color="blue", label="Predicted")
+plt.title("Stock Price Prediction Using LSTM")
+plt.xlabel("Time")
+plt.ylabel("Stock Price")
+plt.legend()
+plt.show()
 
 
 
