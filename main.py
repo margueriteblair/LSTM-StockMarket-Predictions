@@ -6,7 +6,7 @@ import datetime as dt
 import urllib.request, json
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
-0
+
 
 df = pd.read_csv("Stocks/aapl.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
 print("Loaded data from the Kaggle dataset")
@@ -94,5 +94,24 @@ plt.xlabel('Date', fontsize=18)
 plt.ylabel('Mid Price', fontsize=18)
 plt.legend(fontsize=18)
 plt.show()
+
+#below is going to be a separate data cleaning and prediction model:
+#we need to scale down numbers because the distance calculation that happens
+#in the training phase needs to be mitigated to create more accurate results
+
+sc = MinMaxScaler(feature_range=(0, 1))
+train_data_scaled = sc.fit(mid_prices)
+
+#below, we're going to create a data structure w 60 timestamps
+#and 1 output
+X_train = []
+y_train = []
+for i in range(60, mid_prices.size):
+    X_train.append(train_data_scaled[i-60:i, 0])
+    y_train.append(train_data_scaled[i, 0])
+X_train, y_train = np.array(X_train), np.array(y_train)
+X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+
+
 
 
