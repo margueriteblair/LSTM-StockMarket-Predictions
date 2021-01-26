@@ -53,27 +53,27 @@ for ti in range(split):
 all_mid_data = np.concatenate([train_data, test_data], axis=0)
 
 window_size = 100
-N = train_data.size
+N = all_mid_data.size
 std_avg_predictions = []
 std_avg_x = []
 mse_errors = []
 
 for pred_idx in range(window_size, N):
     date = df.loc[pred_idx, 'Date']
-    std_avg_predictions.append(np.mean(train_data[pred_idx - window_size:pred_idx]))
-    mse_errors.append((std_avg_predictions[-1] - train_data[pred_idx]) ** 2)
+    std_avg_predictions.append(np.mean(all_mid_data[pred_idx - window_size:pred_idx]))
+    mse_errors.append((std_avg_predictions[-1] - all_mid_data[pred_idx]) ** 2)
     std_avg_x.append(date)
 
 print('MSE error for standard averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 
 #In other words, you say the prediction at t+1 is the average value of all the stock prices you observed within a window of t to t−N.
 # print(7125-N)
-t_plus_one = 7125
-diff = t_plus_one - (t_plus_one-N)
-next_day = np.mean(all_mid_data[diff: t_plus_one])
-print(next_day)
+# t_plus_one = 7125
+# diff = t_plus_one - (t_plus_one-N)
+# next_day = np.mean(all_mid_data[diff: t_plus_one])
+# print(next_day)
 plt.figure(figsize=(18, 9))
-plt.plot(7125, next_day, 'ro')
+# plt.plot(7125, next_day, 'ro')
 plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
 plt.plot(range(window_size, N), std_avg_predictions, color='orange', label='Prediction')
 plt.title('SMA Prediction vs Actual')
@@ -85,7 +85,7 @@ plt.legend(fontsize=18)
 
 
 window_size = 100
-N = train_data.size
+N = all_mid_data.size
 run_avg_predictions = []
 run_avg_x = []
 mse_errors = []
@@ -95,9 +95,9 @@ run_avg_predictions.append(running_mean)
 decay = 0.5
 
 for pred_idx in range(1, N):
-    running_mean = running_mean * decay + (1.0 - decay) * train_data[pred_idx - 1]
+    running_mean = running_mean * decay + (1.0 - decay) * all_mid_data[pred_idx - 1]
     run_avg_predictions.append(running_mean)
-    mse_errors.append((run_avg_predictions[-1] - train_data[pred_idx]) ** 2)
+    mse_errors.append((run_avg_predictions[-1] - all_mid_data[pred_idx]) ** 2)
 
 print('MSE error for EMA averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 plt.figure(figsize=(18, 9))
