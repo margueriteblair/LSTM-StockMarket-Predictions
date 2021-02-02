@@ -14,10 +14,13 @@ However, this model can and <strong>will</strong> be improved upon in the future
 
 <h4>Technologies Used:</h4>
 <li>Python</li>
+<li>TensorFlow</li>
+<li>Neural Networks</li>
 <li>Pandas</li>
 <li>Numpy</li>
 <li>Kaggle Stock Data</li>
 <li>Sklearn</li>
+<li>Simple Moving Averages</li>
 <li>Exponential Moving Averages</li><br>
 
 Kaggle data used for this project: https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs
