@@ -87,7 +87,7 @@ plt.title('EMA Prediction vs Actual')
 plt.xlabel('Date', fontsize=18)
 plt.ylabel('Mid Price', fontsize=18)
 plt.legend(fontsize=18)
-plt.show()
+# plt.show()
 
 #below is going to be a separate data cleaning and prediction model:
 #we need to scale down numbers because the distance calculation that happens
@@ -102,7 +102,7 @@ training_set = pd.DataFrame(training_set)
 df.isna().any()
 
 sc = MinMaxScaler(feature_range=(0, 1))
-train_data_scaled = sc.fit(training_set)
+train_data_scaled = sc.fit_transform(training_set)
 
 #below, we're going to create a data structure w 60 timestamps
 #and 1 output
@@ -110,7 +110,7 @@ X_train = []
 y_train = []
 #below, we take data from day 0-60, make a prediction on day 61
 #then take data from day 1-61 and make a prediction about day 62
-for i in range(60, train_data_scaled.size):
+for i in range(60, training_set.size):
     X_train.append(train_data_scaled[i-60:i, 0])
     y_train.append(train_data_scaled[i, 0])
 X_train, y_train = np.array(X_train), np.array(y_train)
@@ -182,6 +182,7 @@ predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 predicted_stock_price = pd.DataFrame(predicted_stock_price)
 print(predicted_stock_price.info())
 
+plt.figure(figsize=(18, 9))
 plt.plot(real_stock_price, color="red", label="Actual")
 plt.plot(predicted_stock_price, color="blue", label="Predicted")
 plt.title("Stock Price Prediction Using LSTM")
