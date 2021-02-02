@@ -93,6 +93,8 @@ plt.show()
 #we need to scale down numbers because the distance calculation that happens
 #in the training phase needs to be mitigated to create more accurate results
 
+#below is where we start the data preprocessing stage. data preprocessing involves
+#data cleaning, transformation, integration etc. once the data is clean, we will divide into test & training sets
 training_set = df['Open']
 training_set = pd.DataFrame(training_set)
 
