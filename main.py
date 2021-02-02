@@ -116,6 +116,7 @@ for i in range(60, train_data_scaled.size):
 X_train, y_train = np.array(X_train), np.array(y_train)
 X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
 
+#Date, High, Low, Close, Volume are the features that we'll be choosing to feed to the RNN
 from keras.models import Sequential #We can create a sequential model by passing a list through it
 from keras.layers import Dense #Regularly connected NN layer, reps a matrix vector
 from keras.layers import LSTM
@@ -145,7 +146,10 @@ regressor.add(Dropout(0.2))
 #we only want/need one output so we set the output layer last and have units set to one
 regressor.add(Dense(units=1))
 
+#adam includes a penalty for larger weights in order to regularize
 regressor.compile(optimizer='adam', loss='mean_squared_error')
+
+#using dropouts has statistically proven to reduce MSE
 #the optimizer is one of the required values here for the compiler
 #we have to make sure that the weights dont get too large
 #we have to regularize the data
