@@ -6,12 +6,13 @@ import urllib.request, json
 from sklearn.preprocessing import MinMaxScaler
 
 
-df = pd.read_csv("Stocks/aapl.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close'])
+#pandas.read_csv will return a dataframe object
+df = pd.read_csv("Stocks/aapl.us.txt", delimiter=',', usecols=['Date', 'Open', 'High', 'Low', 'Close', 'Volume'])
 print("Loaded data from the Kaggle dataset")
 rows, columns = df.shape
 df = df.sort_values('Date')
-df.isna().any()
-# print(df.head())
+print(df.isna().any()) #when we print this, we're looking for all false values, which means that all values match definitions
+print(df.head())
 
 plt.figure(figsize=(18, 9))
 plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
