@@ -12,7 +12,7 @@ print("Loaded data from the Kaggle dataset")
 rows, columns = df.shape
 df = df.sort_values('Date')
 print(df.isna().any()) #when we print this, we're looking for all false values, which means that all values match definitions
-print(df.head())
+print(df.head()) #df.head() prints first 5 results, df.tail() will print last 5 results
 
 plt.figure(figsize=(18, 9))
 plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
