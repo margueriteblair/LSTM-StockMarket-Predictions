@@ -13,7 +13,7 @@ rows, columns = df.shape
 df = df.sort_values('Date')
 print(df.isna().any()) #when we print this, we're looking for all false values, which means that all values match definitions
 print(df.head()) #df.head() prints first 5 results, df.tail() will print last 5 results
-
+# print(df.info()) all our datatypes are homogenous as needed
 plt.figure(figsize=(18, 9))
 plt.plot(range(df.shape[0]), (df['Low'] + df['High']) / 2.0)
 plt.xticks(range(0, df.shape[0], 500), df['Date'].loc[::500], rotation=45)
@@ -51,11 +51,6 @@ for pred_idx in range(window_size, N):
 print('MSE error for standard averaging: %.5f' % (0.5 * np.mean(mse_errors)))
 
 #In other words, you say the prediction at t+1 is the average value of all the stock prices you observed within a window of t to t−N.
-# print(7125-N)
-# t_plus_one = 7125
-# diff = t_plus_one - (t_plus_one-N)
-# next_day = np.mean(all_mid_data[diff: t_plus_one])
-# print(next_day)
 plt.figure(figsize=(18, 9))
 # plt.plot(7125, next_day, 'ro')
 plt.plot(range(df.shape[0]), all_mid_data, color='b', label='True')
