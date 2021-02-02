@@ -98,6 +98,9 @@ plt.show()
 training_set = df['Open']
 training_set = pd.DataFrame(training_set)
 
+#data cleaning, checking if there's any non-fitting values
+df.isna().any()
+
 sc = MinMaxScaler(feature_range=(0, 1))
 train_data_scaled = sc.fit(training_set)
 
@@ -105,7 +108,9 @@ train_data_scaled = sc.fit(training_set)
 #and 1 output
 X_train = []
 y_train = []
-for i in range(60, mid_prices.size):
+#below, we take data from day 0-60, make a prediction on day 61
+#then take data from day 1-61 and make a prediction about day 62
+for i in range(60, train_data_scaled.size):
     X_train.append(train_data_scaled[i-60:i, 0])
     y_train.append(train_data_scaled[i, 0])
 X_train, y_train = np.array(X_train), np.array(y_train)
