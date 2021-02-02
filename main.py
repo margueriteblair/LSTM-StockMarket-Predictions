@@ -166,9 +166,9 @@ dataset_test["Volume"] = dataset_test["Volume"].str.repace(',', '').astype(float
 test_set = dataset_test["Open"]
 test_set = pd.DataFrame(test_set)
 
-test_set.info()
+print(test_set.info())
 dataset_total = pd.concat((df['Open'], dataset_test['Open']), axis=0)
-inputs = dataset_total[len(dataset_total) - len(dataset_test) -60].values
+inputs = dataset_total[len(dataset_total) - len(dataset_test) - 60].values
 inputs = inputs.reshape(-1, 1)
 inputs = sc.transform(inputs)
 X_test = []
@@ -178,7 +178,9 @@ X_test = np.array(X_test)
 X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+
 predicted_stock_price = pd.DataFrame(predicted_stock_price)
+print(predicted_stock_price.info())
 
 plt.plot(real_stock_price, color="red", label="Actual")
 plt.plot(predicted_stock_price, color="blue", label="Predicted")
